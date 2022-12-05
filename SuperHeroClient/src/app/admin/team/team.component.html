@@ -1,0 +1,32 @@
+<h1>Team Administration</h1>
+
+<div class="form-group row">
+  <label class="col-sm-2 col-form-label">Navn</label>
+  <div class="col-sm-10">
+    <input [(ngModel)]="team.name" class="form-control">
+  </div>
+</div>
+<button (click)="save()" class="btn btn-sm btn-success">Gem</button>
+<button (click)="cancel()" class="btn btn-sm btn-default">Annuller</button>
+<span *ngIf="message" class="text-danger">{{message}}</span>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th style="width:105px;">Actions</th>
+      <th style="width:40px;">Id</th>
+      <th>Navn</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let team of teams">
+      <td>
+        <button (click)="edit(team)" class="btn btn-sm btn-primary">Ret</button>
+        <button (click)="delete(team)" class="btn btn-sm btn-danger">Slet</button>
+      </td>
+      <td>{{ team.id }}</td>
+      <td>{{ team.name }}</td>
+    </tr>
+  </tbody>
+</table>

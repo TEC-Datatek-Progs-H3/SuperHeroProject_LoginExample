@@ -1,0 +1,11 @@
+﻿global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using SuperHeroAPI.Database;
+global using SuperHeroAPI.Database.Entities;
+global using SuperHeroAPI.DTOs;
+global using SuperHeroAPI.Authorization;
+global using SuperHeroAPI.Helpers;
+global using SuperHeroAPI.Repositories;
+global using SuperHeroAPI.Services;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
