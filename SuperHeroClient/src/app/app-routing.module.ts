@@ -9,11 +9,28 @@ import { AuthGuard } from './_helpers/auth.guard';
 import { Role } from './_models/role';
 
 const routes: Routes = [
-  { path: '', component: FrontpageComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'cartdemo', component: CartDemoComponent },
-  { path: 'admin/super-hero', component: SuperHeroComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
-  { path: 'admin/team', component: TeamComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
+  {
+    path: '',
+    component: FrontpageComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'cartdemo',
+    component: CartDemoComponent
+  },
+  {
+    path: 'admin/super-hero',
+    component: SuperHeroComponent,
+    canActivate: [AuthGuard], data: { roles: [Role.Admin] }
+  },
+  {
+    path: 'admin/team',
+    component: TeamComponent,
+    canActivate: [AuthGuard], data: { roles: [Role.Admin] }
+  },
   { path: '**', redirectTo: '' }
 ];
 

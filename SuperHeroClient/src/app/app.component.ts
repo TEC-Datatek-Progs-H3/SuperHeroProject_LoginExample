@@ -25,10 +25,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     console.log("test");
-    this.cartService.currentBasket.subscribe(x => {
-      this.basket = x;
-      // console.log("Basket Updated")
-    });
+    this.cartService.currentBasket.subscribe(x => this.basket = x);
   }
   logout() {
     if (confirm('Er du sikker på du vil logge ud')) {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Role } from '../_models/role';
 import { User } from '../_models/user';
 
 @Injectable({
@@ -12,9 +13,9 @@ export class AuthService {
   currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    // fake login durring testing
+    // fake login useful when testing
     // if (sessionStorage.getItem('currentUser') == null) {
-    //   sessionStorage.setItem('currentUser', JSON.stringify({ id: 0, email: '', username: '', role: null }));
+    //   sessionStorage.setItem('currentUser', JSON.stringify({ id: 1, email: '', username: '', role: Role.Admin }));
     // }
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(sessionStorage.getItem('currentUser') as string)
@@ -33,7 +34,6 @@ export class AuthService {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         sessionStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
-        // console.log('login user',user);
         return user;
       }));
   }

@@ -19,6 +19,7 @@
             _userRepository = userRepository;
             _jwtUtils = jwtUtils;
         }
+
         public async Task<LoginResponse> AuthenticateUser(LoginRequest login)
         {
             User user = await _userRepository.GetByEmail(login.Email);

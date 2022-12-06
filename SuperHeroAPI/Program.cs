@@ -14,10 +14,10 @@ builder.Services.AddCors(options =>
 });
 
 // Add services to the container.
-builder.Services.AddTransient<ISuperHeroService, SuperHeroService>();
-builder.Services.AddTransient<ISuperHeroRepository, SuperHeroRepository>();
-builder.Services.AddTransient<ITeamService, TeamService>();
-builder.Services.AddTransient<ITeamRepository, TeamRepository>();
+builder.Services.AddScoped<ISuperHeroService, SuperHeroService>();
+builder.Services.AddScoped<ISuperHeroRepository, SuperHeroRepository>();
+builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
