@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { randomString } from '../_helpers/tools'; // only used for demo!
 import { CartItem } from '../_models/cartItem';
 import { CartService } from '../_services/cart.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart-demo',
+  standalone:true,
+  imports:[CommonModule, FormsModule],
   templateUrl: './cart-demo.component.html',
-  styleUrls: ['./cart-demo.component.css']
+  styles: []
 })
 export class CartDemoComponent implements OnInit {
   cartItems: CartItem[] = [];

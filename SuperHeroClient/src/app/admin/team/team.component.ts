@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Team } from 'src/app/_models/team';
 import { TeamService } from 'src/app/_services/team.service';
 
 @Component({
   selector: 'app-team',
+  standalone:true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './team.component.html',
-  styleUrls: ['./team.component.css']
+  styles: []
 })
 export class TeamComponent implements OnInit {
   message: string = '';
@@ -19,7 +23,7 @@ export class TeamComponent implements OnInit {
   }
 
   edit(team: Team): void {
-    // copies values 
+    // copies values
     this.team = {
       id: team.id,
       name: team.name

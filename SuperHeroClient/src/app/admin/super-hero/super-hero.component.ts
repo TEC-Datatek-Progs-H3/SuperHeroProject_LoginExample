@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SuperHero } from 'src/app/_models/superHero';
 import { Team } from 'src/app/_models/team';
 import { SuperHeroService } from 'src/app/_services/super-hero.service';
@@ -6,8 +8,10 @@ import { TeamService } from 'src/app/_services/team.service';
 
 @Component({
   selector: 'app-super-hero',
+  standalone:true,
+  imports:[CommonModule, FormsModule],
   templateUrl: './super-hero.component.html',
-  styleUrls: ['./super-hero.component.css']
+  styles: []
 })
 export class SuperHeroComponent implements OnInit {
   message: string = '';
