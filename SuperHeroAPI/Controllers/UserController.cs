@@ -4,11 +4,15 @@
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;
+        //private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
+        private readonly IJwtUtils _jwtUtils;
 
-        public UserController(IUserService userService)
+        public UserController(IUserRepository userRepository, IJwtUtils jwtUtils)
         {
-            _userService = userService;
+            //_userService = userService;
+            _userRepository = userRepository;
+            _jwtUtils = jwtUtils;
         }
 
         [AllowAnonymous]
@@ -18,14 +22,25 @@
         {
             try
             {
-                LoginResponse response = await _userService.AuthenticateUser(login);
-
-                if (response == null)
+                User user = await _userRepository.GetByEmail(login.Email);
+                if (user == null)
                 {
                     return Unauthorized();
                 }
 
-                return Ok(response);
+                if (user.Password == login.Password)
+                {
+                    return Ok(new LoginResponse
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        Username = user.Username,
+                        Role = user.Role,
+                        Token = _jwtUtils.GenerateJwtToken(user)
+                    });
+                }
+
+                return Unauthorized();
             }
             catch (Exception ex)
             {
@@ -40,8 +55,18 @@
         {
             try
             {
-                UserResponse user = await _userService.RegisterUser(newUser);
-                return Ok(user);
+                User user = new()
+                {
+                    Email = newUser.Email,
+                    Username = newUser.Username,
+                    Password = newUser.Password,
+                    Role = Helpers.Role.User // force all users created through Register, to Role.User
+                };
+
+                user = await _userRepository.Create(user);
+
+                return Ok(MapUserTouserResponse(user));
+
 
             }
             catch (Exception ex)
@@ -56,7 +81,7 @@
         {
             try
             {
-                List<UserResponse> users = await _userService.GetAllUsers();
+                List<User> users = await _userRepository.GetAll();
 
                 if (users == null)
                 {
@@ -68,7 +93,7 @@
                     return NoContent();
                 }
 
-                return Ok(users);
+                return Ok(users.Select(user => MapUserTouserResponse(user)).ToList());
             }
             catch (Exception ex)
             {
@@ -90,19 +115,33 @@
                     return Unauthorized(new { message = "Unauthorized" });
                 }
 
-                UserResponse user = await _userService.GetById(userId);
+                User user = await _userRepository.GetById(userId);
+
 
                 if (user == null)
                 {
                     return NoContent();
                 }
 
-                return Ok(user);
+                return Ok(MapUserTouserResponse(user));
             }
             catch (Exception ex)
             {
                 return Problem(ex.Message);
             }
         }
+
+
+        static private UserResponse MapUserTouserResponse(User user)
+        {
+            return new UserResponse
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Username = user.Username,
+                Role = user.Role
+            };
+        }
+
     }
 }
