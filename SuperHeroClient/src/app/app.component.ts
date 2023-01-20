@@ -4,9 +4,12 @@ import { CartItem } from './_models/cartItem';
 import { User } from './_models/user';
 import { AuthService } from './_services/auth.service';
 import { CartService } from './_services/cart.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
+
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

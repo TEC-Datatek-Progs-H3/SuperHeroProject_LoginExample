@@ -21,7 +21,6 @@ builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddDbContext<SuperHeroDbContext>(options =>
 {

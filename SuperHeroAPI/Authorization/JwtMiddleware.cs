@@ -1,4 +1,6 @@
-﻿namespace SuperHeroAPI.Authorization
+﻿using SuperHeroAPI.Controllers;
+
+namespace SuperHeroAPI.Authorization
 {
     public class JwtMiddleware
     {
@@ -9,14 +11,15 @@
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService, IJwtUtils jwtUtils)
+        public async Task Invoke(HttpContext context, IUserRepository userRepository, IJwtUtils jwtUtils)
         {
             string token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             int? userId = jwtUtils.ValidateJwtToken(token);
             if (userId != null)
             {
                 // attach user to context on successful jwt validation
-                context.Items["User"] = await userService.GetById(userId.Value);
+                var user = await userRepository.GetById(userId.Value);
+                context.Items["User"] = UserController.MapUserTouserResponse(user);
             }
 
             await _next(context);

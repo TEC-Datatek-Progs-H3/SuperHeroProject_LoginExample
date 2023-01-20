@@ -131,8 +131,7 @@
             }
         }
 
-
-        static private UserResponse MapUserTouserResponse(User user)
+        public static UserResponse MapUserTouserResponse(User user)
         {
             return new UserResponse
             {
