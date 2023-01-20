@@ -87,7 +87,6 @@
             return MapUserTouserResponse(user);
         }
 
-
         static private UserResponse MapUserTouserResponse(User user)
         {
             return new UserResponse

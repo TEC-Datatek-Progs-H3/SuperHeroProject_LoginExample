@@ -14,6 +14,10 @@ const routes: Routes = [
     loadComponent: () => import('./frontpage.component').then(_ => _.FrontpageComponent)
   },
   {
+    path: 'hero/:heroId',
+    loadComponent: () => import('./hero-detail.component').then(_ => _.HeroDetailComponent)
+  },
+  {
     path: 'login',
     loadComponent: () => import('./login/login.component').then(_ => _.LoginComponent)
   },
@@ -32,8 +36,7 @@ const routes: Routes = [
     loadComponent: () => import('./admin/team/team.component')
       .then(_ => _.TeamComponent),
     canActivate: [AuthGuard], data: { roles: [Role.Admin] }
-  },
-  { path: '**', redirectTo: '' }
+  }
 ];
 
 @NgModule({

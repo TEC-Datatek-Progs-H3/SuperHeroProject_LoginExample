@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart-demo',
-  standalone:true,
-  imports:[CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './cart-demo.component.html',
   styles: []
 })
@@ -25,14 +25,15 @@ export class CartDemoComponent implements OnInit {
   // OBS! this method belongs on productpage and other places where items can be placed in basket
   addToCart(item?: CartItem): void {
 
+    // create a random product only for demo!
     if (item == null) {
-      // create a random product only for demo!
       item = {
         productId: Math.floor(Math.random() * 1000000),
         price: Math.random() * 999.99,
         quantity: this.amount,
         title: randomString(12)
       } as CartItem;
+
       this.amount = Math.floor(Math.random() * 10) + 1;
     }
 
