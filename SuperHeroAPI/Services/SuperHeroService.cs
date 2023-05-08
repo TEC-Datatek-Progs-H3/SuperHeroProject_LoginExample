@@ -82,35 +82,52 @@
             return null;
         }
 
-        private static SuperHero MapSuperHeroRequestToSuperHero(SuperHeroRequest superHero)
+        private static SuperHero MapSuperHeroRequestToSuperHero(SuperHeroRequest superHero) => new SuperHero
         {
-            return new SuperHero
-            {
-                FirstName = superHero.FirstName,
-                LastName = superHero.LastName,
-                Name = superHero.Name,
-                Place = superHero.Place,
-                DebutYear = superHero.DebutYear,
-                TeamId = superHero.TeamId
-            };
-        }
+            FirstName = superHero.FirstName,
+            LastName = superHero.LastName,
+            Name = superHero.Name,
+            Place = superHero.Place,
+            DebutYear = superHero.DebutYear,
+            TeamId = superHero.TeamId
+        };
 
-        private static SuperHeroResponse MapSuperHeroToSuperHeroResponse(SuperHero superHero)
+
+        private static SuperHeroResponse MapSuperHeroToSuperHeroResponse(SuperHero superHero) => new SuperHeroResponse
         {
-            return new SuperHeroResponse
+            Id = superHero.Id,
+            FirstName = superHero.FirstName,
+            LastName = superHero.LastName,
+            Name = superHero.Name,
+            DebutYear = superHero.DebutYear,
+            Place = superHero.Place,
+            Team = new SuperHeroTeamResponse
             {
-                Id = superHero.Id,
-                FirstName = superHero.FirstName,
-                LastName = superHero.LastName,
-                Name = superHero.Name,
-                DebutYear = superHero.DebutYear,
-                Place = superHero.Place,
-                Team = new SuperHeroTeamResponse
-                {
-                    Id = superHero.Team.Id,
-                    Name = superHero.Team.Name
-                }
-            };
-        }
+                Id = superHero.Team.Id,
+                Name = superHero.Team.Name
+            }
+        };
+
+
+        //private static SuperHeroResponse MapSuperHeroToSuperHeroResponse(SuperHero superHero)
+        //{
+        //    SuperHeroResponse response = new SuperHeroResponse
+        //    {
+        //        Id = superHero.Id,
+        //        FirstName = superHero.FirstName,
+        //        LastName = superHero.LastName,
+        //        Name = superHero.Name,
+        //        DebutYear = superHero.DebutYear,
+        //        Place = superHero.Place
+        //    };
+
+        //    if (superHero.Team != null)
+        //    {
+        //        response.Team.Id = superHero.Team.Id;
+        //        response.Team.Name = superHero.Team.Name;
+        //    };
+        //    return response;
+
+        //}
     }
 }

@@ -5,3 +5,15 @@ export interface Team {
   name: string;
   members?: SuperHero[];
 }
+
+
+
+
+
+
+
+
+
+export function resetTeam() {
+  return { id: 0, name: '', members: [] };
+}

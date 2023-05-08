@@ -1,5 +1,6 @@
 ﻿namespace SuperHeroAPI.Controllers
 {
+    [Authorize(Role.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -66,8 +67,6 @@
                 user = await _userRepository.Create(user);
 
                 return Ok(MapUserTouserResponse(user));
-
-
             }
             catch (Exception ex)
             {
@@ -75,7 +74,7 @@
             }
         }
 
-        [Authorize(Role.Admin)] // only admins are allowed entry to this endpoint
+     
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -101,7 +100,7 @@
             }
         }
 
-        [Authorize(Role.User, Role.Admin)]
+        [Authorize(Role.Admin, Role.User)]
         [HttpGet]
         [Route("{userId}")]
         public async Task<IActionResult> GetById([FromRoute] int userId)

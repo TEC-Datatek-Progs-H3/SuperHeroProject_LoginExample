@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Team } from 'src/app/_models/team';
+import { Team, resetTeam } from 'src/app/_models/team';
 import { TeamService } from 'src/app/_services/team.service';
 
 @Component({
   selector: 'app-team',
-  standalone:true,
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './team.component.html',
   styles: []
@@ -14,7 +14,7 @@ import { TeamService } from 'src/app/_services/team.service';
 export class TeamComponent implements OnInit {
   message: string = '';
   teams: Team[] = [];
-  team: Team = { id: 0, name: '' };
+  team: Team = resetTeam();
 
   constructor(private teamService: TeamService) { }
 
@@ -43,7 +43,7 @@ export class TeamComponent implements OnInit {
 
   cancel(): void {
     this.message = '';
-    this.team = { id: 0, name: '' };
+    this.team = resetTeam();
   }
 
   save(): void {
@@ -54,7 +54,7 @@ export class TeamComponent implements OnInit {
         .subscribe({
           next: (x) => {
             this.teams.push(x);
-            this.team = { id: 0, name: '' };
+            this.team = resetTeam();
           },
           error: (err) => {
             this.message = Object.values(err.error.errors).join(', ');
@@ -69,7 +69,7 @@ export class TeamComponent implements OnInit {
           },
           complete: () => {
             this.teamService.getAll().subscribe(x => this.teams = x);
-            this.team = { id: 0, name: '' };
+            this.team = resetTeam();
           }
         });
     }

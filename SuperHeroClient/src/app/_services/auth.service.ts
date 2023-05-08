@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User, resetUser } from '../_models/user';
 import { Role } from '../_models/role';
-import { User } from '../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     // fake login useful when testing
-    // if (sessionStorage.getItem('currentUser') == null) {
-    //   sessionStorage.setItem('currentUser', JSON.stringify({ id: 1, email: '', username: '', role: Role.Admin }));
-    // }
+    if (sessionStorage.getItem('currentUser') == null) {
+      let user: User = resetUser();
+      // user.role = Role.Admin;
+      sessionStorage.setItem('currentUser', JSON.stringify(user));
+    }
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(sessionStorage.getItem('currentUser') as string)
     );

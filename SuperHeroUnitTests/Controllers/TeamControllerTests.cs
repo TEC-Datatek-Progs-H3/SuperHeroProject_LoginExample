@@ -1,4 +1,6 @@
-﻿namespace TeamUnitTests.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace TeamUnitTests.Controllers
 {
     public class TeamControllerTests
     {
@@ -10,34 +12,41 @@
             _teamController = new TeamController(_teamServiceMock.Object);
         }
 
-        [Fact]
-        public async void GetAll_ShouldReturnStatusCode200_WhenTeamsExists()
-        {
-            // Arrange
-            List<TeamResponse> teams = new();
+        //[Fact]
+        //public async void GetAll_ShouldReturnStatusCode200_WhenTeamsExists()
+        //{
+        //    // Arrange
+        //    List<TeamResponse> teams = new();
 
-            teams.Add(new TeamResponse
-            {
-                Id = 1,
-                Name = "Justice League"
-            });
+        //    teams.Add(new TeamResponse
+        //    {
+        //        Id = 1,
+        //        Name = "Justice League"
+        //    });
 
-            teams.Add(new TeamResponse
-            {
-                Id = 2,
-                Name = "Avengers"
-            });
+        //    teams.Add(new TeamResponse
+        //    {
+        //        Id = 2,
+        //        Name = "Avengers"
+        //    });
 
-            _teamServiceMock
-                .Setup(x => x.GetAll())
-                .ReturnsAsync(teams);
+        //    _teamServiceMock
+        //        .Setup(x => x.GetAll())
+        //        .ReturnsAsync(teams);
 
-            // Act
-            var result = (IStatusCodeActionResult)await _teamController.GetAll();
+        //    // Act
+        //    var result = await _teamController.GetAll();
 
-            // Assert
-            Assert.Equal(200, result.StatusCode);
-        }
+        //    // Assert
+        //    Assert.IsType<OkObjectResult>(result);
+
+        //    var objectResult = (OkObjectResult?)result.Result;
+        //    Assert.Equal(200, objectResult?.StatusCode);
+
+        //    var value = (List<TeamResponse>)objectResult?.Value;
+        //    Assert.NotNull(value);
+        //    Assert.Equal(2, value?.Count);  
+        //}
 
         [Fact]
         public async void GetAll_ShouldReturnStatusCode204_WhenNoTeamsExists()

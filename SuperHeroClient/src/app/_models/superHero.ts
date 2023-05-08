@@ -7,6 +7,10 @@ export interface SuperHero {
   lastName: string;
   place: string;
   debutYear: number;
-  teamId:number;
+  teamId: number;
   team?: Team;
+}
+
+export function resetSuperHero() {
+  return { id: 0, name: '', firstName: '', lastName: '', place: '', debutYear: 0, teamId: 0 };
 }

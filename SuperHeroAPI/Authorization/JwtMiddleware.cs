@@ -15,7 +15,7 @@ namespace SuperHeroAPI.Authorization
         {
             string token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             int? userId = jwtUtils.ValidateJwtToken(token);
-            if (userId != null)
+            if (userId is not null)
             {
                 // attach user to context on successful jwt validation
                 var user = await userRepository.GetById(userId.Value);

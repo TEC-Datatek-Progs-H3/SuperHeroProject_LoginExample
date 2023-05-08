@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SuperHero } from 'src/app/_models/superHero';
+import { SuperHero, resetSuperHero } from 'src/app/_models/superHero';
 import { Team } from 'src/app/_models/team';
 import { SuperHeroService } from 'src/app/_services/super-hero.service';
 import { TeamService } from 'src/app/_services/team.service';
@@ -16,7 +16,7 @@ import { TeamService } from 'src/app/_services/team.service';
 export class SuperHeroComponent implements OnInit {
   message: string = '';
   superHeroes: SuperHero[] = [];
-  superHero: SuperHero = { id: 0, name: '', firstName: '', lastName: '', place: '', debutYear: 0, teamId: 0 };
+  superHero: SuperHero = resetSuperHero();
   teams: Team[] = [];
 
   constructor(private superHeroService: SuperHeroService, private teamService: TeamService) { }
@@ -54,7 +54,7 @@ export class SuperHeroComponent implements OnInit {
 
   cancel(): void {
     this.message = '';
-    this.superHero = { id: 0, name: '', firstName: '', lastName: '', place: '', debutYear: 0, teamId: 0 }
+    this.superHero = resetSuperHero();
   }
 
   save(): void {
@@ -65,7 +65,7 @@ export class SuperHeroComponent implements OnInit {
         .subscribe({
           next: (x) => {
             this.superHeroes.push(x);
-            this.superHero = { id: 0, name: '', firstName: '', lastName: '', place: '', debutYear: 0, teamId: 0 };
+            this.superHero = resetSuperHero();
           },
           error: (err) => {
             console.log(err);
@@ -81,7 +81,7 @@ export class SuperHeroComponent implements OnInit {
           },
           complete: () => {
             this.superHeroService.getAll().subscribe(x => this.superHeroes = x);
-            this.superHero = { id: 0, name: '', firstName: '', lastName: '', place: '', debutYear: 0, teamId: 0 };
+            this.superHero = resetSuperHero();
           }
         });
     }

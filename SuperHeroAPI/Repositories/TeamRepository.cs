@@ -1,5 +1,7 @@
 ﻿namespace SuperHeroAPI.Repositories
 {
+
+
     public interface ITeamRepository
     {
         Task<List<Team>> GetAll();

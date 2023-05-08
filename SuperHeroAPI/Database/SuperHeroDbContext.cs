@@ -8,8 +8,42 @@
         public DbSet<Team> Team { get; set; }
         public DbSet<User> User { get; set; }
 
+        public DbSet<Apparel> Apparel { get; set; }
+        public DbSet<Closet> Closet { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
+            modelBuilder.Entity<Closet>().HasData(
+                new Closet
+                {
+                    Id = 1,
+                    Name = "Skab 1",
+                    Description = "Det store"
+                },
+                new Closet
+                {
+                    Id = 2,
+                    Name = "Skab 2",
+                    Description = "Det lille"
+                });
+            modelBuilder.Entity<Apparel>().HasData(
+                new Apparel
+                {
+                    Id = 1,
+                    Name = "Sorte jeans",
+                    Description = "De sorte wrangler",
+                    ClosetId = 1
+                },
+                new Apparel
+                {
+                    Id = 2,
+                    Name = "Blå jeans",
+                    Description = "De blå lewis",
+                    ClosetId = 2
+                });
+
             modelBuilder.Entity<User>().HasData(
               new User
               {
@@ -39,6 +73,7 @@
                     Id = 2,
                     Name = "Avengers"
                 });
+
 
             modelBuilder.Entity<SuperHero>().HasData(
                 new SuperHero

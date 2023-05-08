@@ -1,12 +1,16 @@
 <nav class="nav nav-pills">
   <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+
   <a routerLink="/admin/super-hero" class="nav-link" routerLinkActive="active"
     *ngIf="currentUser != null && currentUser.role == 'Admin'">SuperHero</a>
+
   <a routerLink="/admin/team" class="nav-link" routerLinkActive="active"
     *ngIf="currentUser != null && currentUser.role == 'Admin'">Team</a>
 
   <a routerLink="/cartdemo" class="nav-link" routerLinkActive="active">Kurv ({{ basket.length }})</a>
+
   <a routerLink="/login" class="nav-link" routerLinkActive="active" *ngIf="currentUser == null">Login</a>
+
   <a *ngIf="currentUser != null" class="nav-link" (click)="logout()">Logout</a>
 </nav>
 

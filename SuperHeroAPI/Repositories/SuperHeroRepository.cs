@@ -25,7 +25,9 @@
 
         public async Task<SuperHero> GetById(int superHeroId)
         {
-            return await _context.SuperHero.Include(s => s.Team).FirstOrDefaultAsync(s => s.Id == superHeroId);
+            return await _context.SuperHero
+                .Include(s => s.Team)
+                .FirstOrDefaultAsync(s => s.Id == superHeroId);
         }
 
         public async Task<SuperHero> Create(SuperHero newSuperHero)
